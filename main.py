@@ -25,7 +25,7 @@ async def start(message: types.Message):
                 KeyboardButton(
                     text="🚀 Открыть AI Аватара",
                     web_app=WebAppInfo(
-                        url="https://kapusta1651.github.io/AI-Avatar-Bot/"
+                        url="https://aivora1.github.io/AI_AVATAR/"
                     )
                 )
             ]
@@ -44,4 +44,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main()
+    asyncio.run(main())
