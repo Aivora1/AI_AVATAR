@@ -17,6 +17,9 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 
+
+
+
 @dp.message(Command("start"))
 async def start(message: types.Message):
     keyboard = ReplyKeyboardMarkup(
@@ -37,6 +40,17 @@ async def start(message: types.Message):
         "Привет, я твоя AI личность 🤖",
         reply_markup=keyboard
     )
+
+@dp.message()
+async def log_all_messages(message: types.Message):
+    user = message.from_user
+
+    print("=" * 40)
+    print(f"👤 User ID: {user.id}")
+    print(f"👤 Username: @{user.username}")
+    print(f"💬 Text: {message.text}")
+    print("=" * 40)
+
 
 
 async def main():
