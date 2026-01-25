@@ -10,7 +10,7 @@
 
 </head>
 <body>
-
+<div id="onboarding">
   <h1>🤖 Создание AI Аватара</h1>
 
   <div class="card">
@@ -35,6 +35,50 @@
 
     <button onclick="createAvatar()">Создать аватар</button>
   </div>
- <script src="script.js"></script>
+</div>
+
+<!-- ЭКРАН ГЛАВНОЙ СТРАНИЦЫ -->
+<div id="dashboard" class="hidden">
+  <div class="container">
+
+    <div class="card">
+      <div class="avatar-header">
+        <div class="avatar-icon">🤖</div>
+        <div>
+          <div id="avatarName"><b>Alex</b></div>
+          <div id="avatarType">Архетип: 🧠 Умный</div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div>⭐ Уровень</div>
+          <b id="level">1</b>
+        </div>
+        <div class="stat">
+          <div>📈 XP</div>
+          <b id="xp">0 / 100</b>
+        </div>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+    </div>
+
+    <div class="card energy">
+      ⚡ Энергия <b id="energy">10 / 10</b>
+    </div>
+
+    <div class="actions">
+      <button onclick="startChat()">💬 Общаться</button>
+      <button class="secondary" onclick="upgrade()">🛠 Прокачка</button>
+      <button class="secondary" onclick="profile()">📊 Профиль</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

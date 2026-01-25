@@ -49,3 +49,79 @@ button {
 button:hover {
     background: #7070ff;
 }
+
+
+.container {
+    padding: 20px;
+    max-width: 420px;
+    margin: auto;
+}
+
+
+.avatar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5b5bff, #9b5bff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+}
+
+.stat {
+    text-align: center;
+    flex: 1;
+}
+
+.progress-bar {
+    background: #2a2a35;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 10px;
+    margin-top: 6px;
+}
+
+.progress {
+    height: 100%;
+    width: 45%;
+    background: linear-gradient(90deg, #5b5bff, #8b5bff);
+}
+
+.energy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background: #5b5bff;
+}
+
+.actions button.secondary {
+    background: #2a2a35;
+}
+
+.hidden {
+  display: none;
+}

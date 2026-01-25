@@ -3,22 +3,40 @@ tg.ready();
 tg.expand();
 
 function createAvatar() {
-    const name = document.getElementById("name").value;
-    const archetype = document.getElementById("archetype").value;
-    const style = document.getElementById("style").value;
+  const name = document.getElementById("name").value;
+  const archetype = document.getElementById("archetype").value;
+  const style = document.getElementById("style").value;
 
-    if (!name) {
+  if (!name) {
     tg.showAlert("Введите имя аватара");
     return;
-    }
+  }
 
-    const data = {
+  // обновляем UI
+  document.getElementById("avatarName").innerText = name;
+  document.getElementById("avatarType").innerText = "Архетип: " + archetype;
+
+  // переключаем экраны
+  document.getElementById("onboarding").classList.add("hidden");
+  document.getElementById("dashboard").classList.remove("hidden");
+
+  // отправляем данные в бота
+  tg.sendData(JSON.stringify({
     action: "create_avatar",
-    name: name,
-    archetype: archetype,
-    style: style
-    };
+    name,
+    archetype,
+    style
+  }));
+}
 
-    tg.sendData(JSON.stringify(data));
-    tg.close();
+function startChat() {
+  tg.sendData(JSON.stringify({ action: "start_chat" }));
+}
+
+function upgrade() {
+  tg.sendData(JSON.stringify({ action: "upgrade_menu" }));
+}
+
+function profile() {
+  tg.sendData(JSON.stringify({ action: "profile" }));
 }
