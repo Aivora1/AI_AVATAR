@@ -21,12 +21,12 @@ function createAvatar() {
   document.getElementById("dashboard").classList.remove("hidden");
 
   // отправляем данные в бота
-  tg.sendData(JSON.stringify({
-    action: "create_avatar",
-    name,
-    archetype,
-    style
-  }));
+  // tg.sendData(JSON.stringify({
+  //   action: "create_avatar",
+  //   name,
+  //   archetype,
+  //   style
+  // }));
 }
 
 function startChat() {
@@ -40,3 +40,4 @@ function upgrade() {
 function profile() {
   tg.sendData(JSON.stringify({ action: "profile" }));
 }
+
