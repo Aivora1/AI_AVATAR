@@ -1,43 +1,33 @@
-const tg = window.Telegram.WebApp;
-tg.ready();
-tg.expand();
+let tapCount = 0;
+const maxTaps = 3;
 
-function createAvatar() {
-  const name = document.getElementById("name").value;
-  const archetype = document.getElementById("archetype").value;
-  const style = document.getElementById("style").value;
+const setupScreen = document.getElementById('setup');
+const mainScreen = document.getElementById('main');
+const startBtn = document.getElementById('startBtn');
+const tapBtn = document.getElementById('tapBtn');
 
-  if (!name) {
-    tg.showAlert("Введите имя аватара");
-    return;
+const hello = document.getElementById('hello');
+const tapsText = document.getElementById('taps');
+const forecast = document.getElementById('forecast');
+
+startBtn.addEventListener('click', () => {
+  const name = document.getElementById('name').value || 'Друг';
+
+  hello.innerText = `Привет, ${name}`;
+  setupScreen.classList.remove('active');
+  mainScreen.classList.add('active');
+});
+
+tapBtn.addEventListener('click', () => {
+  tapCount++;
+
+  const left = maxTaps - tapCount;
+
+  if (left > 0) {
+    tapsText.innerText = `Осталось ${left} тап(а)`;
+  } else {
+    tapsText.innerText = 'День раскрыт ✨';
+    forecast.style.display = 'block';
+    tapBtn.disabled = true;
   }
-
-  // обновляем UI
-  document.getElementById("avatarName").innerText = name;
-  document.getElementById("avatarType").innerText = "Архетип: " + archetype;
-
-  // переключаем экраны
-  document.getElementById("onboarding").classList.add("hidden");
-  document.getElementById("dashboard").classList.remove("hidden");
-
-  // отправляем данные в бота
-  // tg.sendData(JSON.stringify({
-  //   action: "create_avatar",
-  //   name,
-  //   archetype,
-  //   style
-  // }));
-}
-
-function startChat() {
-  tg.sendData(JSON.stringify({ action: "start_chat" }));
-}
-
-function upgrade() {
-  tg.sendData(JSON.stringify({ action: "upgrade_menu" }));
-}
-
-function profile() {
-  tg.sendData(JSON.stringify({ action: "profile" }));
-}
-
+});
