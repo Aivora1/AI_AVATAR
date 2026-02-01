@@ -1,3 +1,10 @@
+if (window.Telegram && Telegram.WebApp) {
+  Telegram.WebApp.ready();
+} else {
+  console.log("Not in Telegram WebApp");
+}
+
+
 let tapCount = 0;
 const maxTaps = 3;
 
@@ -31,9 +38,21 @@ tapBtn.addEventListener('click', () => {
     tapBtn.disabled = true;
   }
 });
-// Telegram.WebApp.sendData(JSON.stringify({
-//   name: name,
-//   birth_date: birth,
-//   zodiac: zodiac
+const saveBtn = document.getElementById('saveBtn');
 
-// }))
+saveBtn.addEventListener('click', () => {
+  const name = document.getElementById('name').value;
+  const birth = document.getElementById('birth').value;
+  const zodiac = document.getElementById('zodiac').value;
+
+  if (!name || !birth || !zodiac) {
+    alert("Заполни все поля");
+    return;
+  }
+
+  Telegram.WebApp.sendData(JSON.stringify({
+    name: name,
+    birth_date: birth,
+    zodiac: zodiac
+  }));
+});
