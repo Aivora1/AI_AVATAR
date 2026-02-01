@@ -31,8 +31,9 @@ tapBtn.addEventListener('click', () => {
     tapBtn.disabled = true;
   }
 });
-Telegram.WebApp.sendData(JSON.stringify({
-  name: name,
-  birth_date: birth,
-  zodiac: zodiac
-}))
+// Telegram.WebApp.sendData(JSON.stringify({
+//   name: name,
+//   birth_date: birth,
+//   zodiac: zodiac
+
+// }))
