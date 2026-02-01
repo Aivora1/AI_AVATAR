@@ -1,31 +1,43 @@
-if (window.Telegram && Telegram.WebApp) {
-  Telegram.WebApp.ready();
-} else {
-  console.log("Not in Telegram WebApp");
-}
-
-
 let tapCount = 0;
 const maxTaps = 3;
 
-const setupScreen = document.getElementById('setup');
-const mainScreen = document.getElementById('main');
-const startBtn = document.getElementById('startBtn');
-const tapBtn = document.getElementById('tapBtn');
+// --- Telegram WebApp init ---
+if (window.Telegram && Telegram.WebApp) {
+  Telegram.WebApp.ready();
+  Telegram.WebApp.expand();
+}
 
-const hello = document.getElementById('hello');
-const tapsText = document.getElementById('taps');
-const forecast = document.getElementById('forecast');
+// --- Elements ---
+const setupScreen = document.getElementById("setup");
+const mainScreen = document.getElementById("main");
 
-startBtn.addEventListener('click', () => {
-  const name = document.getElementById('name').value || 'Друг';
+const startBtn = document.getElementById("startBtn");
+const tapBtn = document.getElementById("tapBtn");
+const saveBtn = document.getElementById("saveBtn");
+
+const hello = document.getElementById("hello");
+const tapsText = document.getElementById("taps");
+const forecast = document.getElementById("forecast");
+
+// --- Start ---
+startBtn.addEventListener("click", () => {
+  const name = document.getElementById("name").value;
+  const birth = document.getElementById("birth").value;
+  const zodiac = document.getElementById("zodiac").value;
+
+  if (!name || !birth || !zodiac) {
+    alert("Заполни все поля");
+    return;
+  }
 
   hello.innerText = `Привет, ${name}`;
-  setupScreen.classList.remove('active');
-  mainScreen.classList.add('active');
+
+  setupScreen.classList.remove("active");
+  mainScreen.classList.add("active");
 });
 
-tapBtn.addEventListener('click', () => {
+// --- Tap logic ---
+tapBtn.addEventListener("click", () => {
   tapCount++;
 
   const left = maxTaps - tapCount;
@@ -33,26 +45,23 @@ tapBtn.addEventListener('click', () => {
   if (left > 0) {
     tapsText.innerText = `Осталось ${left} тап(а)`;
   } else {
-    tapsText.innerText = 'День раскрыт ✨';
-    forecast.style.display = 'block';
+    tapsText.innerText = "День раскрыт ✨";
+    forecast.style.display = "block";
     tapBtn.disabled = true;
   }
 });
-const saveBtn = document.getElementById('saveBtn');
 
-saveBtn.addEventListener('click', () => {
-  const name = document.getElementById('name').value;
-  const birth = document.getElementById('birth').value;
-  const zodiac = document.getElementById('zodiac').value;
+// --- Send data & close ---
+saveBtn.addEventListener("click", () => {
+  const name = document.getElementById("name").value;
+  const birth = document.getElementById("birth").value;
+  const zodiac = document.getElementById("zodiac").value;
 
-  if (!name || !birth || !zodiac) {
-    alert("Заполни все поля");
-    return;
+  if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.sendData(JSON.stringify({
+      name: name,
+      birth_date: birth,
+      zodiac: zodiac
+    }));
   }
-
-  Telegram.WebApp.sendData(JSON.stringify({
-    name: name,
-    birth_date: birth,
-    zodiac: zodiac
-  }));
 });
