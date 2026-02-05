@@ -1,13 +1,13 @@
 let tapCount = 0;
 const maxTaps = 3;
 
-// --- Telegram WebApp init ---
+
 if (window.Telegram && Telegram.WebApp) {
   Telegram.WebApp.ready();
   Telegram.WebApp.expand();
 }
 
-// --- Elements ---
+
 const setupScreen = document.getElementById("setup");
 const mainScreen = document.getElementById("main");
 
@@ -19,7 +19,20 @@ const hello = document.getElementById("hello");
 const tapsText = document.getElementById("taps");
 const forecast = document.getElementById("forecast");
 
-// --- Start ---
+forecast.style.display = "none";
+tapBtn.disabled = false;
+tapCount = 0;
+tapsText.innerText = "Нажми 3 раза";
+
+function resetDay() {
+  tapCount = 0;
+  forecast.style.display = "none";
+  tapBtn.disabled = false;
+  tapsText.innerText = "Нажми 3 раза";
+}
+
+
+
 startBtn.addEventListener("click", () => {
   const name = document.getElementById("name").value;
   const birth = document.getElementById("birth").value;
@@ -31,12 +44,13 @@ startBtn.addEventListener("click", () => {
   }
 
   hello.innerText = `Привет, ${name}`;
+  
 
   setupScreen.classList.remove("active");
   mainScreen.classList.add("active");
 });
 
-// --- Tap logic ---
+
 tapBtn.addEventListener("click", () => {
   tapCount++;
 
@@ -51,7 +65,7 @@ tapBtn.addEventListener("click", () => {
   }
 });
 
-// --- Send data & close ---
+
 saveBtn.addEventListener("click", () => {
   const name = document.getElementById("name").value;
   const birth = document.getElementById("birth").value;

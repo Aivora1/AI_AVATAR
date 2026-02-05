@@ -13,19 +13,18 @@ from aiogram.types import (
 from dotenv import load_dotenv
 
 
-# ---------- CONFIG ----------
+
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 WEBAPP_URL = "https://aivora1.github.io/AI_AVATAR/" 
 
 USERS_FILE = "users.json"
 
-# ---------- INIT ----------
+
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
 
-# ---------- HELPERS ----------
 def load_users():
     if not os.path.exists(USERS_FILE):
         return {}
@@ -38,7 +37,6 @@ def save_users(users):
         json.dump(users, f, ensure_ascii=False, indent=2)
 
 
-# ---------- COMMANDS ----------
 @dp.message(Command("start"))
 async def start(message: types.Message):
     keyboard = ReplyKeyboardMarkup(
@@ -60,7 +58,7 @@ async def start(message: types.Message):
     )
 
 
-# ---------- WEB APP DATA ----------
+
 @dp.message(lambda m: m.web_app_data is not None)
 async def webapp_handler(message: types.Message):
     data = json.loads(message.web_app_data.data)
@@ -87,7 +85,6 @@ async def webapp_handler(message: types.Message):
     )
 
 
-# ---------- MAIN ----------
 async def main():
     await dp.start_polling(bot)
 
