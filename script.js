@@ -68,18 +68,37 @@ startBtn.addEventListener("click", () => {
 });
 
 
-tapBtn.addEventListener("click", () => {
-  tapCount++;
+tapBtn.addEventListener("click", async () => {
+    tapCount++;
+    const left = maxTaps - tapCount;
 
-  const left = maxTaps - tapCount;
+    if (left > 0) {
+        tapsText.innerText = `Осталось ${left} тап(а)`;
+    } else {
+        tapsText.innerText = "День раскрыт ✨";
+        tapBtn.disabled = true;
+        forecast.style.display = "block";
 
-  if (left > 0) {
-    tapsText.innerText = `Осталось ${left} тап(а)`;
-  } else {
-    tapsText.innerText = "День раскрыт ✨";
-    forecast.style.display = "block";
-    tapBtn.disabled = true;
-  }
+        const cached = localStorage.getItem("today_forecast");
+        if (cached) {
+            forecastText.innerText = cached;
+            return;
+        }
+
+
+        const data = {
+            name: document.getElementById("name").value,
+            birth: document.getElementById("birth").value,
+            zodiac: document.getElementById("zodiac").value
+        };
+
+        if (window.Telegram && Telegram.WebApp) {
+            Telegram.WebApp.sendData(JSON.stringify(data));
+        }
+
+        
+        forecastText.innerText = "Получение прогноза...";
+    }
 });
 
 
@@ -96,3 +115,8 @@ saveBtn.addEventListener("click", () => {
     }));
   }
 });
+
+function setForecastFromBot(forecast_from_bot) {
+    forecastText.innerText = forecast_from_bot;
+    localStorage.setItem("today_forecast", forecast_from_bot);
+}
