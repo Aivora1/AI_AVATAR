@@ -92,9 +92,9 @@ tapBtn.addEventListener("click", async () => {
             zodiac: document.getElementById("zodiac").value
         };
 
-        if (window.Telegram && Telegram.WebApp) {
-            Telegram.WebApp.sendData(JSON.stringify(data));
-        }
+        // if (window.Telegram && Telegram.WebApp) {
+        //     Telegram.WebApp.sendData(JSON.stringify(data));
+        // }
 
         
         forecastText.innerText = "Получение прогноза...";
